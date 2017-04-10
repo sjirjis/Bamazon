@@ -32,4 +32,45 @@ update t_products
 set department_name = 'athletic clothing'
 where department_name = 'Athletic Clothing';
 
-select * from t_products
+create table t_departments (
+	department_id int not null,
+    department_name varchar (64) not null,
+    over_head_cost decimal (9,2) not null,
+    total_sales decimal (11,2) not null
+);
+
+alter table t_products
+add product_sales decimal (11,2);
+
+update t_products
+set stock_quantity = 30
+	,product_sales = 0;
+    
+alter table t_products
+modify column stock_quantity int(11) unsigned;
+
+alter table t_departments
+modify column department_id int not null auto_increment primary key;
+
+insert t_departments (
+	department_name
+    ,over_head_cost
+    ,total_sales
+) select distinct department_name, 0, 0 from t_products;
+
+update t_departments
+set over_head_cost = 54929
+where department_id = 1;
+
+update t_departments
+set over_head_cost = 65738
+where department_id = 2;
+
+update t_departments
+set over_head_cost = 23413
+where department_id = 3;
+
+update t_departments
+set over_head_cost = 30585
+where department_id = 4;
+
